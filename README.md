@@ -4,7 +4,7 @@ Es una aplicación NodeJS que hace de publicador y consumidor de mensajes en kaf
 
 ### Pre-requisitos 📋
 * NodeJs (12+)
-* Kafka Descargado y descomprimido
+* Kafka descargado y descomprimido
 
 ## Instalación & revisión de ambiente kafka funcionando 🔧
 
@@ -13,13 +13,17 @@ Es una aplicación NodeJS que hace de publicador y consumidor de mensajes en kaf
 ### 2.- Arrancamos Zookeeper que es la herramienta o proyecto que usa Kafka para gestionar su cluster.
 Con las configuraciones por defecto: zookeeper.properties
 Nueva Consola
+```
 <KAFKA_HOME>/bin/zookeeper-server-start.sh config/zookeeper.properties
+```
 
 ### 3.- Arrancamos Kafka : Es el broker kafka
 
 Con las configuraciones por defecto: server.properties
 Nueva Consola
+```
 <KAFKA_HOME>/bin/kafka-server-start.sh config/server.properties
+```
 
 ### 4.- Crear 'topic' en Apache Kafka
 
@@ -29,18 +33,24 @@ Esto lo hemos hecho de la siguiente manera:
 
 #### Creamos nuestro primer topic 'test'
 Nueva Consola
+```
 <KAFKA_HOME>/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+```
 
 Resultado:
+```
 Created topic test.
+```
 
 #### Comprobamos que existe
 Nueva Consola
+```
 <KAFKA_HOME>/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
-
+```
 Resultado:
+```
 test
-
+```
 
 ### 5.- Teseo de envío y recepción de mensajes
 
@@ -50,11 +60,27 @@ Podemos trastear el uso de mandar mensajes y recibirlos mediante un par de scrip
 
 #### Productor
 Nueva Consola
+```
 <KAFKA_HOME>/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+```
+
+Resultado:
+```
+>Hola Soy Eduardo
+>
+```
+
 
 #### Consumidor
 Nueva Consola
+```
 <KAFKA_HOME>/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+```
+
+Resultado:
+```
+Hola Soy Eduardo
+```
 
 
 ### 6.- Probar la aplicacion JavaScript que use mensajería con Kafka
